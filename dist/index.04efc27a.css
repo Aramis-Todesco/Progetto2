@@ -1,0 +1,228 @@
+:root {
+  --font-standard: "Raleway", sans-serif;
+  --font-size-s: 1.4rem;
+  --font-size-xs: calc(var(--font-size-s) * .9);
+  --font-size-m: calc(var(--font-size-s) * 1.2);
+  --font-size-l: calc(var(--font-size-s) * 1.5);
+  --font-size-xl: calc(var(--font-size-s) * 2);
+  --gap-s: 1.5rem;
+  --gap-m: calc(var(--gap-s) * 2);
+  --gap-l: calc(var(--gap-s) * 3);
+  --gap-xl: calc(var(--gap-s) * 5);
+  --color-white: #fff;
+  --color-dark: #474747;
+  --color-gray: #8f8f8f;
+  --color-light: #e6e6e6;
+  --color-primary: #fe3e6e;
+  --color-secondary: #04dca6;
+  --max-block-width: 1200px;
+  font-size: 62.5%;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+  background: none;
+  border: none;
+  border-radius: 2rem;
+  outline: none;
+  padding: .8em 1.8em;
+}
+
+body {
+  padding: var(--gap-m);
+  font-size: var(--font-size-m);
+  color: var(--color-dark);
+  font-family: var(--font-standard);
+  background-color: var(--color-light);
+  line-height: 1.5em;
+}
+
+#form-component {
+  background-color: var(--color-white);
+  gap: var(--gap-l);
+  padding: var(--gap-m);
+  grid-template: "header header"
+                 "indicator form"
+                 / 30px 1fr;
+  transition: all .5s ease-in-out;
+  display: grid;
+}
+
+@media (width >= 600px) {
+  #form-component {
+    grid-template: "header header"
+                   "indicator form"
+                   / 200px 1fr;
+  }
+}
+
+#form-component:focus-within {
+  border-bottom: 2px solid var(--color-gray);
+}
+
+#form-info {
+  grid-area: header;
+}
+
+#form-indicator {
+  grid-area: indicator;
+}
+
+#form-wrapper {
+  grid-area: form;
+  overflow: hidden;
+}
+
+.step-info {
+  padding-top: var(--gap-m);
+  display: none;
+}
+
+@media (width >= 600px) {
+  .step-info {
+    display: initial;
+  }
+}
+
+.step-status {
+  grid-template-columns: 1fr 30px;
+  display: grid;
+}
+
+.step-indicator {
+  border-left: 1px solid var(--color-gray);
+  padding-block: var(--gap-m);
+}
+
+.indicator-item {
+  border-radius: 50%;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  display: grid;
+}
+
+.indicator-item.current {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.indicator-item.success {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.indicator-item.next {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray);
+}
+
+.step-status.inviato {
+  color: var(--color-secondary);
+  font-weight: bold;
+  display: none;
+}
+
+.step-status.inviato .indicator-item {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.step-status.inviato > .step-indicator {
+  padding-bottom: 0;
+}
+
+.form-item {
+  margin-bottom: var(--gap-m);
+  position: relative;
+}
+
+.form-item > label {
+  cursor: text;
+  transition: all .4s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+:is(input, textarea):focus + label, :is(input, textarea):not(:placeholder-shown) + label {
+  font-size: var(--font-size-xs);
+  top: -18px;
+}
+
+.form-item > :is(input, textarea) {
+  padding-block: 0, 5em;
+  border: none;
+  border-bottom: 1px solid var(--color-gray);
+  outline: none;
+  width: 100%;
+}
+
+@media (width >= 600px) {
+  .form-group-item {
+    column-gap: var(--gap-l);
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+  }
+}
+
+#riepilogo-wrapper > ul {
+  list-style-type: none;
+}
+
+[id^="step-"] > h3 {
+  margin-bottom: var(--gap-m);
+}
+
+#form-btn-control {
+  text-align: right;
+}
+
+#btn-prev {
+  background-color: var(--color-light);
+  margin-right: var(--gap-s);
+  display: none;
+}
+
+#btn-next {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transition: all .5s;
+}
+
+#btn-next:hover {
+  background-color: var(--color-secondary);
+}
+
+#steps {
+  width: 400%;
+  display: flex;
+}
+
+[id^="step-"] {
+  width: 25%;
+}
+
+#step-1 {
+  margin-left: 0;
+  transition: all .6s;
+}
+
+.form-item.has-error {
+  color: var(--color-primary);
+}
+
+.form-item.has-error > :is(input, textarea) {
+  border-bottom: 1px solid var(--color-primary);
+}
+/*# sourceMappingURL=index.04efc27a.css.map */
