@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"fyXh1":[function(require,module,exports) {
+})({"cixhq":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -612,6 +612,16 @@ function initApp() {
     config.btnNext.addEventListener("click", stepHandler);
     config.btnPrev.addEventListener("click", stepHandler);
 }
+function aggiornaRiepilogo() {
+    // Seleziona tutti gli input del form
+    const inputs = document.querySelectorAll("#steps input");
+    // Per ogni input, trova il corrispondente <span> nel riepilogo e aggiornalo
+    inputs.forEach((input)=>{
+        const idInput = input.id;
+        const spanRiepilogo = document.getElementById(`riepilogo-${idInput}`);
+        if (spanRiepilogo) spanRiepilogo.textContent = input.value;
+    });
+}
 function inviaForm() {
     document.querySelector("#form-btn-control").style.display = "none";
     document.querySelector(".step-status.inviato").style.display = "grid";
@@ -650,6 +660,7 @@ function aggiornaForm(newStep) {
     aggionaPulsanti();
     aggiornaIndicatori();
     aggiornaCampiMostrati();
+    if (config.currentStep === config.STEPS) aggiornaRiepilogo();
 }
 function aggionaPulsanti() {
     let { STEPS, currentStep, btnNext, btnPrev } = config;
@@ -8647,6 +8658,6 @@ function isVAT(str, countryCode) {
     throw new Error("Invalid country code: '".concat(countryCode, "'"));
 }
 
-},{"bef829e803e114f9":"dGQqH","83803936e2b74d1f":"1HfIt"}]},["fyXh1","ghJDj"], "ghJDj", "parcelRequire8e67")
+},{"bef829e803e114f9":"dGQqH","83803936e2b74d1f":"1HfIt"}]},["cixhq","ghJDj"], "ghJDj", "parcelRequire8e67")
 
 //# sourceMappingURL=index.79e4eaeb.js.map
