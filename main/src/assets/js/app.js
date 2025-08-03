@@ -1,5 +1,3 @@
-import validator from "validator";
-
 const config = {
   STEPS: 3,
   STEP_NEXT: 1,
@@ -56,19 +54,34 @@ function inviaForm() {
   document.querySelector(".step-status.inviato").style.display = "grid";
 }
 
+function isEmailValid(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+function isPasswordStrong(password) {
+  // La password deve avere almeno 8 caratteri, una maiuscola, una minuscola, un numero e un carattere speciale.
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return regex.test(password);
+}
+
 function validaCampi() {
   let result = true;
   getCampi().forEach((formElem) => {
-    const fieldValue = formElem.value,
-      checks = [
-        formElem.type === "email" && !validator.isEmail(fieldValue),
-        formElem.required && validator.isEmpty(fieldValue),
-      ];
+    const fieldValue = formElem.value;
     reimpostaClassi(formElem.parentElement, "", "has-error");
-    if (checks.includes(true)) {
+
+    if (formElem.required && fieldValue.trim() === "") {
       reimpostaClassi(formElem.parentElement, "has-error");
       result = false;
     }
+
+    if (formElem.type === "email" && !isEmailValid(fieldValue)) {
+      reimpostaClassi(formElem.parentElement, "has-error");
+      result = false;
+    }
+
     if (formElem.type === "password" && formElem.id === "password") {
       result = checkPassword(formElem, fieldValue);
     }
@@ -78,10 +91,8 @@ function validaCampi() {
 
 function checkPassword(formElem, fieldValue) {
   const confirm = document.querySelector("#password-confirm").value;
-  if (
-    !validator.isStrongPassword(fieldValue) ||
-    !validator.equals(fieldValue, confirm)
-  ) {
+
+  if (!isPasswordStrong(fieldValue) || fieldValue !== confirm) {
     reimpostaClassi(formElem.parentElement, "has-error");
     return false;
   }
